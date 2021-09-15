@@ -2,6 +2,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+def connect_db(app):
+    """Connect to database."""
+
+    db.app = app
+    db.init_app(app)
+
 class User(db.Model):
     """User Model"""
 
@@ -16,8 +22,3 @@ class User(db.Model):
                      nullable=False)         
     image_url = db.Column(db.String(), default = None)
 
-def connect_db(app):
-    """Connect to database."""
-
-    db.app = app
-    db.init_app(app)
