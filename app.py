@@ -62,25 +62,34 @@ def process_form():
 
     return redirect('/users')
 
-# FIXME: bug error while rendering invalid maluser 
-# @app.get('/users/<int:user-id>')
-# def display_user():
-#     # Play user-id in parameter
-#     """Render data of user, edit and delete button"""
 
-#     return render_template('/')
+@app.get('/users/<int:id>')
+def display_user(id):
+    """Render data of user, edit and delete button"""
 
-# @app.get('/users/<int:user-id>/edit')
-# def render_user_edit():
-#     """Render edit page for user"""
+    user = User.query.get(id)
+    return render_template('user-info.html', user = user)
 
-#     return render_template('/')
+@app.get('/users/<int:id>/edit')
+def render_user_edit(id):
+    """Render edit page for user"""
 
-# @app.post('/users/<int:user-id>/edit')
-# def process_edit_form():
-#     """Process edit form redirect to users page"""
+    user = User.query.get(id)
+    return render_template('user-edit.html', user = user )
 
-#     return redirect('/users')
+@app.post('/users/<int:id>/edit')
+def process_edit_form(id):
+    """Process edit form redirect to users page"""
+
+    user = User.query.get(id)
+    
+    user.first_name = request.form['first-name']
+    user.last_name = request.form['last-name']
+    user.image_url = request.form['image-url']
+
+    db.session.commit()
+
+    return redirect('/users')
 
 # @app.post('/users/<int:id>/delete')
 # def delete_user():
