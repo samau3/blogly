@@ -26,7 +26,7 @@ class User(db.Model):
     posts_list = db.relationship('Post', backref='posts')
 
 
-class Post(db.Model):
+class Post(db.Model): #Question: Does adding/changing models mean we need to re-seed database? OR was it cause previously wrong foreign key data type
     """Post Model"""
 
     __tablename__ = "posts"
@@ -38,6 +38,6 @@ class Post(db.Model):
                       nullable=False)
     content = db.Column(db.String(),
                         nullable=False)
-    created_at = db.Column(db.DateTime)
-    user_id = db.Column(db.Integer,
+    created_at = db.Column(db.DateTime) # Need to have deafault time
+    user_id = db.Column(db.Integer, 
                         db.ForeignKey('users.id'))
