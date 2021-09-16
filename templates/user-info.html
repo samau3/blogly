@@ -12,16 +12,12 @@
   <button>Delete</button>
 </form>
 
-<a href="/users/{{ user.id }}/posts/new">
-  <button>Add Post</button>
-</a>
-
 <div class="post-info">
   <h3>Posts</h3>
   <ul>
     {% for post in user.posts_list%}
     <li>
-      <a href="/posts/{{post.post_id}}>"> {{post}} </a>
+      <a href="/posts/{{post.id}}"> {{post.title}} </a>
     </li>
     {% endfor %}
   </ul>

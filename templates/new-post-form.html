@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 <h1>Add Post for {{ user.first_name }} {{ user.last_name }}</h1>
-<form action="/users/{{post.id}}/posts/new" method="POST">
+<form action="/users/{{ user.id }}/posts/new" method="POST">
   <div class="input">
     <label>
       Title
@@ -11,7 +11,7 @@
   <div class="input">
     <label>
       Content
-      <input name="content" type="textarea" />
+      <textarea rows="2" cols="20" name="content" type="text"></textarea>
     </label>
   </div>
   <button>Add</button>

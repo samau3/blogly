@@ -31,13 +31,13 @@ class Post(db.Model):
 
     __tablename__ = "posts"
 
-    post_id = db.Column(db.Integer,
-                        primary_key=True,
-                        autoincrement=True)
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
     title = db.Column(db.String(50),
                       nullable=False)
     content = db.Column(db.String(),
                         nullable=False)
     created_at = db.Column(db.DateTime)
-    id = db.Column(db.Text,
-                   db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey('users.id'))

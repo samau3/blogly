@@ -3,16 +3,20 @@
 
 <p>{{post.content}}</p>
 
-<p>By User here later</p>
+<p>By {{post.posts.first_name}} {{post.posts.last_name}} </p>
 
-<a href="/users">
-  <button>Cancel</button>
-</a>
-<a href="/users/new">
-  <button>Edit Link</button>
-</a>
-<!-- <form action="/users/{{ user.id }}/delete" method="POST">
-    <button>Delete Post</button>
-  </form> -->
+<div>
+  <a href="/users">
+    <button>Cancel</button>
+  </a>
+</div>
+<div>
+  <a href="/posts/{{ post.id }}/edit">
+    <button>Edit Link</button>
+  </a>
+</div>
+<form action="/posts/{{ post.id }}/delete" method="POST">
+  <button>Delete Post</button>
+</form>
 
 {% endblock %}
