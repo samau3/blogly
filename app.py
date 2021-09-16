@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, render_template
-from models import connect_db, db, User
+from models import connect_db, db, User, Post
 from flask_debugtoolbar import DebugToolbarExtension
 
 
@@ -98,3 +98,40 @@ def delete_user(id):
     db.session.delete(user)    
     db.session.commit()
     return redirect('/users')
+
+############################POST ROUTE#############################
+@app.get('/users/<int:id>/posts/new')
+def render_blog_post_form(id):
+    """Find the user id render post-form"""
+
+    user = User.query.get_or_404(id)
+
+    return render_template('new-post-form.html', user=user)
+
+@app.post('/users/<int:id>/posts/new')
+def handle_blog_post_form(id):
+    """Create a new instance of Post from the new post form, redirects back to user page"""
+
+    user = User.query.get_or_404(id)
+    breakpoint()
+
+    content = request.form['content']
+    title = request.form['title']
+
+    create_new_post = Post(
+        title = title, 
+        content = content, 
+        id = id 
+        )
+
+    user.posts_list.append(create_new_post)
+
+    return redirect('/users/<int:id>')
+
+# @app.get( '/posts/<int:post_id>') 
+# def display_post(post_id): 
+#     """Render post list by a user"""
+#     #Need to query the post when clicked on
+
+#     return render_template('post-detail.html')
+

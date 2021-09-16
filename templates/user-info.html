@@ -4,10 +4,30 @@
 {% if user.image_url %}
 <img src="{{ user.image_url }}" alt="image" />
 {% endif %}
-<a href="/users/{{ user.id }}/edit"><button>Edit</button></a>
+<a href="/users/{{ user.id }}/edit">
+  <button>Edit</button>
+</a>
 
 <form action="/users/{{ user.id }}/delete" method="POST">
   <button>Delete</button>
 </form>
+
+<a href="/users/{{ user.id }}/posts/new">
+  <button>Add Post</button>
+</a>
+
+<div class="post-info">
+  <h3>Posts</h3>
+  <ul>
+    {% for post in user.posts_list%}
+    <li>
+      <a href="/posts/{{post.post_id}}>"> {{post}} </a>
+    </li>
+    {% endfor %}
+  </ul>
+  <a href="/users/{{ user.id }}/posts/new">
+    <button>Add Post</button>
+  </a>
+</div>
 
 {% endblock %}

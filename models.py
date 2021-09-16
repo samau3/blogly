@@ -23,7 +23,7 @@ class User(db.Model):
     last_name = db.Column(db.String(50),
                           nullable=False)
     image_url = db.Column(db.String())
-    # posts_list = db.Relationship('Post', backref='posts')
+    posts_list = db.relationship('Post', backref='posts')
 
 
 class Post(db.Model):
@@ -39,5 +39,5 @@ class Post(db.Model):
     content = db.Column(db.String(),
                         nullable=False)
     created_at = db.Column(db.DateTime)
-    # id = db.Column(db.Text,
-    #                db.ForeignKey('users.id'))
+    id = db.Column(db.Text,
+                   db.ForeignKey('users.id'))
