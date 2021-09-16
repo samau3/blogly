@@ -91,7 +91,12 @@ def process_edit_form(id):
 
     return redirect('/users')
 
-# @app.post('/users/<int:id>/delete')
-# def delete_user():
-#     """Delete the current user"""
-#     return redirect('/users')
+@app.post('/users/<int:id>/delete')
+def delete_user(id):
+    """Delete the current user"""
+
+    user = User.query.get(id)
+
+    db.session.delete(user)    
+    db.session.commit()
+    return redirect('/users')

@@ -1,9 +1,12 @@
 {% extends 'base.html' %} {% block content %}
 <h1>{{ user.first_name }} {{ user.last_name }}</h1>
 
-<img src="/{{ user.image_url }}" alt="image">
+<img src="/{{ user.image_url }}" alt="image" />
 
 <a href="/users/{{ user.id }}/edit"><button>Edit</button></a>
-<a href="/users/{{ user.id }}/delete"><button>Delete</button></a>
+
+<form action="/users/{{ user.id }}/delete" method="POST">
+  <button>Delete</button>
+</form>
 
 {% endblock %}
