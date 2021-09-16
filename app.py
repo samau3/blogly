@@ -50,8 +50,6 @@ def process_form():
     last_name = request.form['last-name']
     image_url = request.form['image-url'] 
 
-    image_url = image_url if image_url else None #need to consider changing if changing how img handled
-
     user = User(
         first_name = first_name, 
         last_name = last_name, 
@@ -67,21 +65,21 @@ def process_form():
 def display_user(id):
     """Render data of user, edit and delete button"""
 
-    user = User.query.get(id) # need to handle wrong ID; getor404
+    user = User.query.get_or_404(id)
     return render_template('user-info.html', user = user)
 
 @app.get('/users/<int:id>/edit')
 def render_user_edit(id):
     """Render edit page for user"""
 
-    user = User.query.get(id)# need to handle wrong ID; getor404
+    user = User.query.get_or_404(id)
     return render_template('user-edit.html', user = user )
 
 @app.post('/users/<int:id>/edit')
 def process_edit_form(id):
     """Process edit form redirect to users page"""
 
-    user = User.query.get(id)# need to handle wrong ID; getor404
+    user = User.query.get_or_404(id)
     
     user.first_name = request.form['first-name']
     user.last_name = request.form['last-name']
@@ -95,7 +93,7 @@ def process_edit_form(id):
 def delete_user(id):
     """Delete the current user"""
 
-    user = User.query.get(id)# need to handle wrong ID; getor404
+    user = User.query.get_or_404(id)
 
     db.session.delete(user)    
     db.session.commit()

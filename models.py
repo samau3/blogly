@@ -22,7 +22,7 @@ class User(db.Model):
                            nullable=False)
     last_name = db.Column(db.String(50),
                           nullable=False)
-    image_url = db.Column(db.String(), default=None) # consider never being NULL; fix on form too
+    image_url = db.Column(db.String())
 
 
 # class Post(db.Model):
