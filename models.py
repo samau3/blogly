@@ -2,11 +2,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 def connect_db(app):
     """Connect to database."""
 
     db.app = app
     db.init_app(app)
+
 
 class User(db.Model):
     """User Model"""
@@ -17,8 +19,21 @@ class User(db.Model):
                    primary_key=True,
                    autoincrement=True)
     first_name = db.Column(db.String(50),
-                     nullable=False)
+                           nullable=False)
     last_name = db.Column(db.String(50),
-                     nullable=False)         
-    image_url = db.Column(db.String(), default = None)
+                          nullable=False)
+    image_url = db.Column(db.String(), default=None) # consider never being NULL; fix on form too
 
+
+# class Post(db.Model):
+#     """POst Model"""
+
+#     __tablename__ = "posts"
+
+#     id = db.Column(db.Integer,
+#                    primary_key=True,
+#                    autoincrement=True)
+#     title = db.Column(db.String(50),
+#                       nullable=False)
+#     content = db.Coumn(db.String(),
+#                        nullable=False)

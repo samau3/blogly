@@ -22,7 +22,7 @@ class UserTestCase(TestCase):
 
         User.query.delete()
 
-        user = User(first_name="TestUser", last_name="TestLast", image_url='')
+        user = User(first_name="TestUser", last_name="TestLast", image_url='') # need to be consistent image handling
         db.session.add(user)
         db.session.commit()
 
@@ -50,7 +50,7 @@ class UserTestCase(TestCase):
             html = resp.get_data(as_text=True)
 
             self.assertEqual(resp.status_code, 200)
-            self.assertIn('<ul>', html)
+            self.assertIn('<ul>', html) # test for if the TestUser is populated on page
     
     def test_create_new_user(self):
         """Testing render of user-form"""
@@ -61,9 +61,9 @@ class UserTestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertIn(
-                '<form', html)
+                '<form', html) # test form tag with the action in case future changes of additional forms
     
-    def test_process_form(self):
+    def test_process_form(self): # rename to be more specific of the form --> edit form
         """Testing value forms of new user"""
         with app.test_client() as client: 
 
