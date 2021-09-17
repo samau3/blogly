@@ -108,7 +108,7 @@ def delete_user(id):
 
 @app.get('/users/<int:id>/posts/new')
 def render_blog_post_form(id):
-    """Find the user id render post-form"""
+    """Find the user id render new post-form"""
 
     user = User.query.get_or_404(id)
 
@@ -138,7 +138,7 @@ def handle_blog_post_form(id):
 
 @app.get('/posts/<int:id>')
 def display_post(id):
-    """Render post list by a user"""
+    """Render individual post by a user"""
 
     post = Post.query.get_or_404(id)
 

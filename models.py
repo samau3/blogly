@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -38,6 +39,6 @@ class Post(db.Model): #Question: Does adding/changing models mean we need to re-
                       nullable=False)
     content = db.Column(db.String(),
                         nullable=False)
-    created_at = db.Column(db.DateTime) # Need to have deafault time
+    created_at = db.Column(db.DateTime, default=datetime.now()) # Need to have deafault time
     user_id = db.Column(db.Integer, 
                         db.ForeignKey('users.id'))
