@@ -103,6 +103,11 @@ def delete_user(id):
 
     # db.session.delete(user)
     # Loop here delete posts, THEN DELETE user
+    
+    for post in user.posts_list:
+        post.query.delete()
+        # db.session.delete(post)
+
     user.query.delete()
     db.session.commit()
     return redirect('/users')
