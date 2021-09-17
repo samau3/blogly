@@ -51,6 +51,8 @@ def process_form():
     last_name = request.form['last-name']
     image_url = request.form['image-url']
 
+    # STORING EMPTY STRING, not getting null
+
     user = User(
         first_name=first_name,
         last_name=last_name,
@@ -99,7 +101,8 @@ def delete_user(id):
 
     user = User.query.get_or_404(id)
 
-    db.session.delete(user)
+    # db.session.delete(user)
+    user.query.delete()
     db.session.commit()
     return redirect('/users')
 

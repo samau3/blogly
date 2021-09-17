@@ -24,6 +24,7 @@ class User(db.Model):
     last_name = db.Column(db.String(50),
                           nullable=False)
     image_url = db.Column(db.String())
+    # MAKE this not null, have two different ways, best to only have one
     posts_list = db.relationship('Post', backref='posts')
 
 
@@ -39,6 +40,9 @@ class Post(db.Model): #Question: Does adding/changing models mean we need to re-
                       nullable=False)
     content = db.Column(db.String(),
                         nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now()) # Need to have deafault time
+    created_at = db.Column(db.DateTime, default=datetime.now) # Need to have deafault time
+    # Not intending to make NOT null 
+    # ASK for time at server start, provide a callback, when it NEEDS the default 
     user_id = db.Column(db.Integer, 
                         db.ForeignKey('users.id'))
+                        #DEFINITELY NOT NULL 

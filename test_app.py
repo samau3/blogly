@@ -73,8 +73,14 @@ class UserTestCase(TestCase):
         """Testing value forms of new user"""
         with app.test_client() as client: 
 
-            user_data = {"first-name": "TestUser2", "last-name": "TestLast2", "image-url": ''}
-            resp = client.post("/users/new", data=user_data, follow_redirects=True)
+            user_data = {
+                "first-name": "TestUser2", 
+                "last-name": "TestLast2", 
+                "image-url": ''
+                }
+                
+            resp = client.post(
+                "/users/new", data=user_data, follow_redirects=True)
             html = resp.get_data(as_text=True)
 
             self.assertEqual(resp.status_code, 200)
@@ -90,6 +96,8 @@ class UserTestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertIn('<h1>TestUser TestLast</h1>', html)
+            self.assertIn('Rithm', html)
+
     
     def test_render_blog_post_form(self): 
         """Render form id"""
