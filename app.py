@@ -102,6 +102,7 @@ def delete_user(id):
     user = User.query.get_or_404(id)
 
     # db.session.delete(user)
+    # Loop here delete posts, THEN DELETE user
     user.query.delete()
     db.session.commit()
     return redirect('/users')
